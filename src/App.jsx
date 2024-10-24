@@ -1,13 +1,12 @@
-import Navbar from './components/Navbar';
-import './styles/index.css';
+
+import Navbar from './components/Navbar'; // Ruta correcta para el componente Navbar
+import MainContent from './components/MainContent'; // Ruta correcta para el componente MainContent
 
 function App() {
   return (
     <div>
       <Navbar />
-      <div className="pt-24">
-        <h1 className="text-white text-center text-4xl">¡Bienvenido a tu app de hábitos futurista!</h1>
-      </div>
+      <MainContent />
     </div>
   );
 }

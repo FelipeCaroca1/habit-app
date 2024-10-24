@@ -1,6 +1,14 @@
-body {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
   font-family: 'Orbitron', sans-serif;
   background-color: #000;
   background: url('/img/fondo-app.png') no-repeat center center fixed;
@@ -9,9 +17,127 @@ body {
 }
 
 h1 {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+.main-content {
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
+  border-radius: 12px;
+  padding: 2rem;
   color: white;
   text-align: center;
-  margin-top: 2rem;
-  font-weight: bold;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.habit-list {
+  min-height: 150px;
+  border: 1px solid #444;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #222;
+}
+
+.habit-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.habit-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #444;
+}
+
+.habit-list li:last-child {
+  border-bottom: none;
+}
+
+/* Botón para añadir hábito */
+.add-habit-button {
+  background-color: #333;
+  color: white;
+  padding: 12px 20px;
+  margin: 10px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.add-habit-button:hover {
+  border-color: #00bfff; /* Hover con borde azul */
+  background-color: #444;
+}
+
+/* Estilos para la modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background: rgba(0, 0, 0, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  color: white;
+  text-align: center;
+}
+
+/* Agrandamos el input */
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 2px solid #555;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #222;
+  color: white;
+}
+
+/* Estilos de los botones de la modal */
+.modal-content button {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-content button:hover {
+  border-color: #00bfff; /* Mismo hover azul que en el navbar */
+  background-color: #444;
+}
+
+/* Alineación de los botones */
+.modal-content .flex {
+  justify-content: center;
+}
+
+/* Botón Eliminar en la lista de hábitos */
+button.bg-red-500 {
+  background-color: #e3342f;
+  width: 5rem;
+  
+}
+
+button.bg-red-500:hover {
+  background-color: #cc1f1a;
 }
