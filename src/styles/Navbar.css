@@ -1,0 +1,29 @@
+nav {
+    display: flex !important; /* Forzamos display: flex */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 60px;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .nav-buttons {
+    display: flex !important;
+    gap: 1rem;
+   
+  }
+  .nav-button {
+    background-color: #333;
+    color: white;
+    padding: 0.8rem 1.5rem; /* Aumentamos el tamaño del padding para que los botones sean más grandes */
+    font-size: 1.1rem; /* Aumentamos el tamaño de la fuente */
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-button:hover {
+    border: 2px solid #00bfff;
+    color: #00bfff;
+  }
