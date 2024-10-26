@@ -3,26 +3,27 @@ import PropTypes from 'prop-types';
 
 const ModalAddHabit = ({ isOpen, onClose, addHabit }) => {
   const [newHabit, setNewHabit] = useState('');
+  const [category, setCategory] = useState('');
   const [isClosing, setIsClosing] = useState(false);
 
   const handleAddHabit = () => {
-    if (newHabit.trim() !== '') {
-      addHabit(newHabit);
-      setNewHabit(''); // Limpiamos el input después de añadir el hábito
+    if (newHabit.trim() !== '' && category !== '') {
+      addHabit({ name: newHabit, category });
+      setNewHabit('');
+      setCategory('');
     }
   };
 
   const handleClose = () => {
-    setIsClosing(true); // Activa el fade-out
+    setIsClosing(true);
   };
 
-  // Efecto para cerrar la modal después del fade-out
   useEffect(() => {
     if (isClosing) {
       const timer = setTimeout(() => {
         setIsClosing(false);
         onClose();
-      }, 300); // Duración de la animación fade-out
+      }, 300);
       return () => clearTimeout(timer);
     }
   }, [isClosing, onClose]);
@@ -40,6 +41,18 @@ const ModalAddHabit = ({ isOpen, onClose, addHabit }) => {
           value={newHabit}
           onChange={(e) => setNewHabit(e.target.value)}
         />
+        <div className="select-wrapper">
+          <select
+            className="p-2 w-full mb-4 border rounded"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">Selecciona una categoría</option>
+            <option value="Salud">Salud</option>
+            <option value="Productividad">Productividad</option>
+            <option value="Creatividad">Creatividad</option>
+          </select>
+        </div>
         <div className="flex justify-between">
           <button
             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
