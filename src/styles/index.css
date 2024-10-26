@@ -276,3 +276,32 @@ select:hover {
 .modal-content .select-wrapper {
   margin-bottom: 1rem; /* Espaciado entre el selector y los botones */
 }
+
+.stats-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.doughnut-chart, .bar-chart {
+  width: 45%; /* Ajusta el tamaño de los gráficos */
+}
+
+.doughnut-chart canvas, .bar-chart canvas {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente en el canvas */
+  border-radius: 12px;
+}
+
+.stats-container h2 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin-bottom: 1.5rem;
+}
