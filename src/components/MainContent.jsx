@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import ModalAddHabit from './ModalAddHabit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const MainContent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [habits, setHabits] = useState([]); // Almacenará objetos con nombre y categoría
+  const [habits, setHabits] = useState([]);
   const [isEditing, setIsEditing] = useState(null);
   const [editText, setEditText] = useState('');
-  const [filter, setFilter] = useState(''); // Nuevo estado para el filtro de categoría
+  const [filter, setFilter] = useState('');
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -19,7 +19,7 @@ const MainContent = () => {
   };
 
   const addHabit = (habit) => {
-    setHabits([...habits, habit]); // Añadir hábito con categoría
+    setHabits([...habits, { ...habit, completed: false }]);
     closeModal();
   };
 
@@ -30,7 +30,7 @@ const MainContent = () => {
 
   const startEditing = (index) => {
     setIsEditing(index);
-    setEditText(habits[index].name); // Editar solo el nombre del hábito
+    setEditText(habits[index].name);
   };
 
   const saveEdit = (index) => {
@@ -41,18 +41,28 @@ const MainContent = () => {
     setIsEditing(null);
   };
 
-  // Filtrar hábitos según la categoría seleccionada
+  const toggleComplete = (index) => {
+    const updatedHabits = habits.map((habit, i) =>
+      i === index ? { ...habit, completed: !habit.completed } : habit
+    );
+    setHabits(updatedHabits);
+  };
+
   const filteredHabits = filter
-    ? habits.filter((habit) => habit.category === filter)
+    ? habits.filter(
+        (habit) =>
+          habit.category === filter ||
+          (filter === 'Completado' && habit.completed) ||
+          (filter === 'Pendiente' && !habit.completed)
+      )
     : habits;
 
   return (
     <section className="main-content p-8">
       <h2 className="text-2xl font-bold text-center mb-6">Tus Hábitos</h2>
       
-      {/* Filtro de Categorías */}
       <div className="mb-4">
-        <label htmlFor="filter" className="mr-2">Filtrar por categoría:</label>
+        <label htmlFor="filter" className="mr-2">Filtrar por categoría o estado:</label>
         <select
           id="filter"
           className="p-2 border rounded"
@@ -63,6 +73,8 @@ const MainContent = () => {
           <option value="Salud">Salud</option>
           <option value="Productividad">Productividad</option>
           <option value="Creatividad">Creatividad</option>
+          <option value="Completado">Completado</option>
+          <option value="Pendiente">Pendiente</option>
         </select>
       </div>
 
@@ -79,9 +91,18 @@ const MainContent = () => {
                     className="habit-edit-input"
                   />
                 ) : (
-                  <span>{habit.name} - <em>{habit.category}</em></span>
+                  <span>
+                    {habit.name} - <em>{habit.category}</em> - {habit.completed ? 'Completado' : 'Pendiente'}
+                  </span>
                 )}
                 <div className="habit-buttons">
+                  <button
+                    onClick={() => toggleComplete(index)}
+                    className={`habit-button ${habit.completed ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+                    style={{ border: habit.completed ? '1px solid #00bfff' : 'none' }}
+                  >
+                    <FontAwesomeIcon icon={faCheck} />
+                  </button>
                   {isEditing === index ? (
                     <button
                       onClick={() => saveEdit(index)}
