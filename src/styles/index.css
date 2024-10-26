@@ -167,3 +167,66 @@ h1 {
   margin-right: 0.5rem; /* Espacio entre el input y los botones */
 }
 
+/* Animaciones para la Modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* Animación de Slide para los elementos de la lista */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animación de Hover en los Botones */
+.nav-button, .add-habit-button, .modal-content button {
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.nav-button:hover, .add-habit-button:hover, .modal-content button:hover {
+  transform: scale(1.05);
+  background-color: #444; /* Cambia ligeramente el color en el hover */
+}
+
+/* Aplicamos las animaciones */
+.modal-overlay.showing {
+  animation: fadeIn 0.3s forwards;
+}
+
+.modal-overlay.hiding {
+  animation: fadeOut 0.3s forwards;
+}
+
+.habit-list li {
+  animation: slideIn 0.4s ease;
+}
+
+/* Aplicación de la animación a los hábitos */
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+

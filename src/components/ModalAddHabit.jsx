@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const ModalAddHabit = ({ isOpen, onClose, addHabit }) => {
   const [newHabit, setNewHabit] = useState('');
+  const [isClosing, setIsClosing] = useState(false);
 
   const handleAddHabit = () => {
     if (newHabit.trim() !== '') {
@@ -11,10 +12,25 @@ const ModalAddHabit = ({ isOpen, onClose, addHabit }) => {
     }
   };
 
-  if (!isOpen) return null;
+  const handleClose = () => {
+    setIsClosing(true); // Activa el fade-out
+  };
+
+  // Efecto para cerrar la modal después del fade-out
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => {
+        setIsClosing(false);
+        onClose();
+      }, 300); // Duración de la animación fade-out
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing, onClose]);
+
+  if (!isOpen && !isClosing) return null;
 
   return (
-    <div className="modal-overlay">
+    <div className={`modal-overlay ${isClosing ? 'hiding' : 'showing'}`}>
       <div className="modal-content">
         <h2 className="text-2xl font-bold mb-4">Añadir un nuevo hábito</h2>
         <input
@@ -33,7 +49,7 @@ const ModalAddHabit = ({ isOpen, onClose, addHabit }) => {
           </button>
           <button
             className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700"
-            onClick={onClose}
+            onClick={handleClose}
           >
             Cancelar
           </button>
@@ -44,10 +60,9 @@ const ModalAddHabit = ({ isOpen, onClose, addHabit }) => {
 };
 
 ModalAddHabit.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    addHabit: PropTypes.func.isRequired,
-  };
-
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  addHabit: PropTypes.func.isRequired,
+};
 
 export default ModalAddHabit;

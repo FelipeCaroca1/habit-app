@@ -47,7 +47,7 @@ const MainContent = () => {
         {habits.length > 0 ? (
           <ul>
             {habits.map((habit, index) => (
-              <li key={index} className="flex justify-between items-center mb-4">
+              <li key={index} className="flex justify-between items-center mb-4 slide-in">
                 {isEditing === index ? (
                   <input
                     type="text"
