@@ -16,6 +16,7 @@ body {
   color: white;
 }
 
+
 h1 {
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
 }
@@ -316,24 +317,26 @@ select:hover { background-color: #333; }
 }
 
 .about-content {
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro y translúcido */
   color: #ffffff; /* Texto blanco */
-  padding: 24px;
+  padding: 30px; /* Mayor espacio interno */
   border-radius: 12px; /* Bordes redondeados */
   box-shadow: 0px 4px 12px rgba(0, 255, 170, 0.2); /* Sombra suave */
-  font-family: 'Orbitron', sans-serif; /* Fuente futurista */
   max-width: 800px; /* Ancho máximo */
   margin: 40px auto; /* Centrar el contenido */
 }
 
 .about-content h1 {
   color: #00FFAA; /* Color verde futurista para el título */
+  margin-bottom: 20px; /* Espacio debajo del título */
+  font-size: 2rem; /* Tamaño del título */
+  text-align: start;
 }
 
 .about-content p {
-  margin-bottom: 16px; /* Espaciado entre párrafos */
-  line-height: 1.6;
-  font-size: 1.1rem;
+  margin-bottom: 15px; /* Mayor espaciado entre párrafos */
+  line-height: 1.6; /* Mayor altura de línea para mejor legibilidad */
+  font-size: 1.1rem; /* Tamaño de fuente de los párrafos */
 }
 
 @keyframes fadeIn {
@@ -368,4 +371,97 @@ select:hover { background-color: #333; }
   font-size: 1rem;
   color: #ffffff;
   font-style: italic;
+}
+
+.config-container {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 40px auto; /* Centrar en la página */
+}
+
+.config-title {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px; /* Espaciado debajo del título */
+}
+.config-item {
+  margin-bottom: 20px; /* Espaciado entre los elementos */
+}
+
+.config-select {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #4b5563; /* Borde gris */
+  background-color: #333; /* Fondo de select */
+  color: white; /* Texto blanco */
+}
+
+.config-checkbox {
+  margin-right: 10px; /* Espaciado al lado del checkbox */
+}
+
+.config-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3b82f6; /* Color de fondo azul */
+  color: white; /* Texto blanco */
+  cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+  transition: background-color 0.3s;
+}
+
+h1 {
+  text-align: center; /* Centrar el título */
+}
+
+label {
+  font-weight: bold; /* Texto en negrita para etiquetas */
+}
+
+button {
+  transition: background-color 0.3s; /* Suavizar el cambio de color */
+}
+
+.config-button:hover {
+  background-color: #2563eb; /* Color de fondo más oscuro al hacer hover */
+}
+
+body[data-theme='claro'] {
+  background-color: #ffffff; /* Color de fondo claro */
+  color: #000000; /* Texto negro */
+}
+
+body[data-theme='oscuro'] {
+  background-color: #000000; /* Color de fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+}
+
+.footer-container {
+  background-color: rgba(0, 0, 0, 0.9); /* Fondo negro traslúcido */
+  color: white; /* Texto blanco */
+  padding: 1rem; /* Espaciado interno */
+  text-align: center; /* Centrar el texto */
+  position: relative; /* Para mantener el footer en su lugar */
+  bottom: 0;
+  width: 100%; /* Asegura que el footer ocupe todo el ancho */
+}
+
+.footer-link {
+  color: #00bfff; /* Color de los enlaces */
+  text-decoration: none; /* Sin subrayado */
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff; /* Cambiar color al hacer hover */
+}
+
+.footer-text {
+  margin: 0.5rem 0; /* Espaciado entre líneas */
 }
