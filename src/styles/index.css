@@ -219,8 +219,19 @@ select:hover { background-color: #333; }
 
 .chart-container {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 12rem;
+  transition: all 0.3s ease;
+}
+
+.single-chart {
+  justify-content: center;
+  margin-left: 0;
+}
+
+.double-chart {
+  justify-content: flex-start;
 }
 
 .doughnut-chart, .bar-chart, .line-chart {

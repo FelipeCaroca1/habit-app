@@ -37,8 +37,6 @@ const Stats = () => {
       },
     ],
   };
-  
-  
 
   // Datos para el gráfico de barras (Pendientes vs Completados)
   const barData = {
@@ -98,16 +96,14 @@ const Stats = () => {
         </div>
       </div>
 
-      <div className="chart-container flex flex-col md:flex-row md:justify-center gap-8">
+      <div className={`chart-container flex flex-col ${progress.completed > 0 ? 'md:flex-row' : ''} justify-center gap-8`}>
         {progress.completed > 0 && (
           <div className="doughnut-chart w-full md:w-1/3 max-w-sm">
             <Doughnut data={doughnutData} options={{ plugins: { legend: { display: false } } }} />
           </div>
         )}
-        <div className="side-charts w-full md:w-2/3 flex flex-col md:flex-row gap-4">
-          <div className="bar-chart w-full md:w-1/2 max-w-sm">
-            <Bar data={barData} options={{ plugins: { legend: { display: false } }, maintainAspectRatio: false }} />
-          </div>
+        <div className={`bar-chart w-full ${progress.completed > 0 ? 'md:w-1/2' : ''} max-w-sm`}>
+          <Bar data={barData} options={{ plugins: { legend: { display: false } }, maintainAspectRatio: false }} />
         </div>
       </div>
     </div>
