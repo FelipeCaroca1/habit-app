@@ -1,39 +1,49 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const apiKey = 'AIzaSyDekSyR3u3uHYLNdeIZj6YVs6Ye9Z-fRpM'; // Coloca aquí tu clave de API
+const apiKey = 'AIzaSyDekSyR3u3uHYLNdeIZj6YVs6Ye9Z-fRpM';
 
 const MotivationalQuote = () => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
+  const [animate, setAnimate] = useState(true); // Mantener el efecto de entrada
 
   useEffect(() => {
     const fetchQuote = async () => {
       try {
-        const response = await axios.get('/api/api/random');
+        // Llamar a tu backend para obtener una cita
+        const response = await axios.get('http://localhost:5000/quote'); 
         const data = response.data[0];
 
-        // Traducir la cita al español usando la API REST de Google Cloud Translation
+        // Traducción de la cita al español
         const translateResponse = await axios.post(
-          `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`,
+          `https://translation.googleapis.com/language/translate/v2`,
+          {},
           {
-            q: data.q,
-            target: 'es'
+            params: {
+              key: apiKey,
+              q: data.q, // Texto en inglés
+              target: 'es', // Idioma de destino
+            },
           }
         );
 
-        setQuote(translateResponse.data.data.translations[0].translatedText);
-        setAuthor(data.a);
+        const translatedQuote = translateResponse.data.data.translations[0].translatedText;
+
+        // Guardamos la frase traducida y el autor
+        setQuote(translatedQuote);
+        setAuthor(data.a); // El autor de la cita
+        setAnimate(true); // Activar el efecto de entrada
       } catch (error) {
-        console.error("Error fetching the quote or translating it", error);
+        console.error("Error fetching or translating the quote", error);
       }
     };
 
-    fetchQuote();
+    fetchQuote(); // Obtener una nueva frase cada vez que se carga el componente
   }, []);
 
   return (
-    <div className="motivational-quote bg-gray-800 text-white p-4 rounded-lg shadow-lg">
+    <div className={`motivational-quote ${animate ? 'fade-in' : ''} bg-gray-800 text-white p-4 rounded-lg shadow-lg`}>
       <p>&quot;{quote}&quot;</p>
       <p className="author">- {author}</p>
     </div>

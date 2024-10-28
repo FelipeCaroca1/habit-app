@@ -315,20 +315,57 @@ select:hover { background-color: #333; }
   .side-charts { flex-direction: row; gap: 24px; }
 }
 
-.motivational-quote {
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con transparencia */
-  color: #00FFAA; /* Color de texto verde futurista */
-  padding: 20px; /* Espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0px 4px 8px rgba(0, 255, 170, 0.2); /* Sombra suave */
-  text-align: center; /* Alineación centrada del texto */
-  margin: 20px auto; /* Márgenes para separar del contenido */
-  width: 80%; /* Ajuste del tamaño para hacerlo más estrecho */
-  font-family: 'Orbitron', sans-serif; /* Fuente futurista ya usada en la app */
-  font-size: 1.2rem; /* Tamaño del texto */
-  max-width: 600px; /* Ancho máximo para no estirarse demasiado en pantallas grandes */
+.about-content {
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+  padding: 24px;
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0px 4px 12px rgba(0, 255, 170, 0.2); /* Sombra suave */
+  font-family: 'Orbitron', sans-serif; /* Fuente futurista */
+  max-width: 800px; /* Ancho máximo */
+  margin: 40px auto; /* Centrar el contenido */
 }
 
-.motivational-quote p {
-  margin: 0; /* Elimina el margen del párrafo */
+.about-content h1 {
+  color: #00FFAA; /* Color verde futurista para el título */
+}
+
+.about-content p {
+  margin-bottom: 16px; /* Espaciado entre párrafos */
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out; /* El efecto de fade-in se aplicará cada vez que cambie la frase */
+}
+.motivational-quote {
+  animation: fadeIn 2s ease-in-out; /* Aparece lentamente en 2 segundos */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro y transparente */
+  color: #00FFAA; /* Color verde futurista */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 255, 170, 0.2);
+  text-align: center;
+  margin: 20px auto;
+  width: 80%;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  max-width: 600px;
+}
+
+.motivational-quote .author {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #ffffff;
+  font-style: italic;
 }

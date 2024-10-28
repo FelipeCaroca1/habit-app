@@ -22,10 +22,11 @@ export const ProgressProvider = ({ children }) => {
     sessionStorage.setItem('progress', JSON.stringify(progress));
   }, [progress]);
 
-  // Función para agregar un nuevo hábito pendiente (sin afectar categorías)
-  const addPendingHabit = () => {
+  // Función para agregar un nuevo hábito pendiente
+  const addPendingHabit = (category) => {
     setProgress((prevProgress) => ({
       ...prevProgress,
+      [category]: prevProgress[category] + 1,
       pending: prevProgress.pending + 1,
     }));
   };
@@ -34,17 +35,16 @@ export const ProgressProvider = ({ children }) => {
   const completeHabit = (category) => {
     setProgress((prevProgress) => ({
       ...prevProgress,
-      [category]: prevProgress[category] + 1, // Incrementar solo la categoría relevante
+      [category]: prevProgress[category] + 1,
       completed: prevProgress.completed + 1,
       pending: Math.max(prevProgress.pending - 1, 0),
     }));
   };
-
   // Función para desmarcar un hábito completado (volver a pendiente)
   const uncompleteHabit = (category) => {
     setProgress((prevProgress) => ({
       ...prevProgress,
-      [category]: Math.max(prevProgress[category] - 1, 0), // Reducir solo la categoría relevante
+      [category]: Math.max(prevProgress[category] - 1, 0),
       completed: Math.max(prevProgress.completed - 1, 0),
       pending: prevProgress.pending + 1,
     }));
@@ -54,9 +54,9 @@ export const ProgressProvider = ({ children }) => {
   const deleteHabit = (category, isCompleted) => {
     setProgress((prevProgress) => ({
       ...prevProgress,
-      [category]: prevProgress[category] - (isCompleted ? 1 : 0),
-      completed: isCompleted ? Math.max(prevProgress.completed - 1, 0) : prevProgress.completed,
-      pending: !isCompleted ? Math.max(prevProgress.pending - 1, 0) : prevProgress.pending,
+      [category]: prevProgress[category] - 1,
+      completed: isCompleted ? prevProgress.completed - 1 : prevProgress.completed,
+      pending: isCompleted ? prevProgress.pending : prevProgress.pending - 1,
     }));
   };
 
