@@ -1,4 +1,3 @@
-// Home.jsx
 import { useState, useContext } from 'react';
 import ModalAddHabit from '../components/ModalAddHabit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,42 +8,31 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { habits, setHabits } = useContext(HabitsContext); // Usamos HabitsContext
-  const { setProgress } = useContext(ProgressContext);
+  const { habits, setHabits } = useContext(HabitsContext);
+  const { addPendingHabit, completeHabit, uncompleteHabit, deleteHabit } = useContext(ProgressContext); 
   const [isEditing, setIsEditing] = useState(null);
   const [editText, setEditText] = useState('');
   const [filter, setFilter] = useState('');
   const navigate = useNavigate();
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    setIsModalOpen(true);
+    setIsEditing(null);
+  };
+
   const closeModal = () => setIsModalOpen(false);
 
   const addHabit = (habit) => {
     setHabits([...habits, { ...habit, completed: false }]);
-    setProgress((prevProgress) => ({
-      ...prevProgress,
-      [habit.category]: prevProgress[habit.category],
-      pending: prevProgress.pending + 1,
-    }));
+    addPendingHabit(habit.category);
     closeModal();
   };
 
-  const deleteHabit = (index) => {
+  const deleteHabitFromList = (index) => {
     const habitToDelete = habits[index];
-    if (habitToDelete.completed) {
-      setProgress((prevProgress) => ({
-        ...prevProgress,
-        completed: prevProgress.completed - 1,
-        [habitToDelete.category]: prevProgress[habitToDelete.category] - 1,
-      }));
-    } else {
-      setProgress((prevProgress) => ({
-        ...prevProgress,
-        pending: prevProgress.pending - 1,
-      }));
-    }
     const newHabits = habits.filter((_, i) => i !== index);
     setHabits(newHabits);
+    deleteHabit(habitToDelete.category, habitToDelete.completed);
   };
 
   const startEditing = (index) => {
@@ -65,22 +53,14 @@ const Home = () => {
       i === index ? { ...habit, completed: !habit.completed } : habit
     );
     setHabits(updatedHabits);
-
+  
     const habitCategory = habits[index].category;
-    if (!habits[index].completed) {
-      setProgress((prevProgress) => ({
-        ...prevProgress,
-        [habitCategory]: prevProgress[habitCategory] + 1,
-        completed: prevProgress.completed + 1,
-        pending: prevProgress.pending - 1,
-      }));
+    const isCompleted = !habits[index].completed;
+  
+    if (isCompleted) {
+      completeHabit(habitCategory);
     } else {
-      setProgress((prevProgress) => ({
-        ...prevProgress,
-        [habitCategory]: prevProgress[habitCategory] - 1,
-        completed: prevProgress.completed - 1,
-        pending: prevProgress.pending + 1,
-      }));
+      uncompleteHabit(habitCategory);
     }
   };
 
@@ -155,7 +135,7 @@ const Home = () => {
                     </button>
                   )}
                   <button
-                    onClick={() => deleteHabit(index)}
+                    onClick={() => deleteHabitFromList(index)}
                     className="habit-button"
                   >
                     <FontAwesomeIcon icon={faTrash} />

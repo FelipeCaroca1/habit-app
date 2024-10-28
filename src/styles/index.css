@@ -21,7 +21,7 @@ h1 {
 }
 
 .main-content {
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
   padding: 2rem;
   color: white;
@@ -68,7 +68,7 @@ h1 {
 }
 
 .add-habit-button:hover {
-  border-color: #00bfff; /* Hover con borde azul */
+  border-color: #00bfff;
   background-color: #444;
 }
 
@@ -96,7 +96,6 @@ h1 {
   text-align: center;
 }
 
-/* Agrandamos el input */
 .modal-content input {
   width: 100%;
   padding: 12px;
@@ -122,7 +121,7 @@ h1 {
 }
 
 .modal-content button:hover {
-  border-color: #00bfff; /* Mismo hover azul que en el navbar */
+  border-color: #00bfff;
   background-color: #444;
 }
 
@@ -131,10 +130,9 @@ h1 {
   justify-content: center;
 }
 
-/* Ajuste de botones de edición y eliminación en la lista de hábitos */
 .habit-buttons {
   display: flex;
-  gap: 0.5rem; /* Espacio entre los botones */
+  gap: 0.5rem;
 }
 
 .habit-button {
@@ -155,7 +153,6 @@ h1 {
   background-color: #444;
 }
 
-/* Estilos del input de edición */
 .habit-edit-input {
   width: 70%;
   padding: 0.3rem;
@@ -164,73 +161,33 @@ h1 {
   background-color: #222;
   color: white;
   font-size: 1rem;
-  margin-right: 0.5rem; /* Espacio entre el input y los botones */
+  margin-right: 0.5rem;
 }
 
-/* Animaciones para la Modal */
+/* Animaciones */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.9);
-  }
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.9); }
 }
 
-/* Animación de Slide para los elementos de la lista */
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-/* Animación de Hover en los Botones */
-.nav-button, .add-habit-button, .modal-content button {
-  transition: transform 0.2s ease, background-color 0.3s ease;
-}
+.modal-overlay.showing { animation: fadeIn 0.3s forwards; }
+.modal-overlay.hiding { animation: fadeOut 0.3s forwards; }
 
-.nav-button:hover, .add-habit-button:hover, .modal-content button:hover {
-  transform: scale(1.05);
-  background-color: #444; /* Cambia ligeramente el color en el hover */
-}
+.habit-list li { animation: slideIn 0.4s ease; }
 
-/* Aplicamos las animaciones */
-.modal-overlay.showing {
-  animation: fadeIn 0.3s forwards;
-}
+.slide-in { animation: slideIn 0.5s ease-out; }
 
-.modal-overlay.hiding {
-  animation: fadeOut 0.3s forwards;
-}
-
-.habit-list li {
-  animation: slideIn 0.4s ease;
-}
-
-/* Aplicación de la animación a los hábitos */
-.slide-in {
-  animation: slideIn 0.5s ease-out;
-}
-
-/* Estilos para los selectores */
+/* Estilos para select */
 select {
   background-color: #222;
   color: white;
@@ -238,49 +195,23 @@ select {
   border-radius: 8px;
   padding: 8px;
   font-size: 1rem;
-  margin: 0.5rem 0; /* Espaciado vertical */
+  margin: 0.5rem 0;
   width: 100%;
   outline: none;
   transition: all 0.3s ease;
 }
 
 select:focus {
-  border-color: #00bfff; /* Color de borde en foco */
+  border-color: #00bfff;
   box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
 }
 
-select option {
-  background-color: #222;
-  color: white;
-}
-
-/* Icono de flecha para el selector */
-select {
-  position: relative;
-}
-
-select::after {
-  content: '▼';
-  font-size: 0.8rem;
-  position: absolute;
-  right: 10px;
-  color: white;
-  pointer-events: none;
-}
-
-select:hover {
-  background-color: #333;
-}
-
-/* Ajuste para la modal */
-.modal-content .select-wrapper {
-  margin-bottom: 1rem; /* Espaciado entre el selector y los botones */
-}
+select:hover { background-color: #333; }
 
 .stats-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 2rem auto;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 2rem;
   border-radius: 12px;
   color: white;
@@ -288,20 +219,87 @@ select:hover {
 
 .chart-container {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.doughnut-chart, .bar-chart, .line-chart {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 50px;
+  border-radius: 8px;
+}
+
+.legend-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.legend-item {
+  display: flex;
   align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #ffffff;
 }
 
-.doughnut-chart, .bar-chart {
-  width: 45%; /* Ajusta el tamaño de los gráficos */
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
 }
 
-.doughnut-chart canvas, .bar-chart canvas {
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente en el canvas */
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.button-back {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: transparent;
+  border: 2px solid #00bfff;
+  color: #00bfff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-back:hover {
+  background-color: #00bfff;
+  color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.stats-summary {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.stat-item h3 {
+  font-size: 1.2rem;
+  color: #00bfff;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.stat-item p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Gráfico de línea */
+.line-chart-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
 }
 
-.stats-container h2 {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  margin-bottom: 1.5rem;
+@media (min-width: 768px) {
+  .chart-container { flex-direction: row; gap: 24px; }
+  .side-charts { flex-direction: row; gap: 24px; }
 }

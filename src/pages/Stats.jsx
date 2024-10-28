@@ -1,4 +1,6 @@
+// Stats.jsx
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ProgressContext } from '../context/ProgressContext';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import {
@@ -14,15 +16,20 @@ import {
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const Stats = () => {
-  const { progress } = useContext(ProgressContext); // Accede al contexto de progreso
+  const { progress } = useContext(ProgressContext);
+  const navigate = useNavigate();
 
-  // Datos para el gráfico circular de progreso por categoría
+  // Datos para el gráfico circular (Doughnut)
   const doughnutData = {
     labels: ['Salud', 'Productividad', 'Creatividad'],
     datasets: [
       {
-        label: 'Progreso por Categoría',
-        data: [progress.Salud, progress.Productividad, progress.Creatividad],
+        label: 'Progreso Completado por Categoría',
+        data: [
+          progress.Salud > 0 ? progress.Salud : 0,
+          progress.Productividad > 0 ? progress.Productividad : 0,
+          progress.Creatividad > 0 ? progress.Creatividad : 0,
+        ],
         backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
         hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
         borderColor: '#222',
@@ -30,8 +37,10 @@ const Stats = () => {
       },
     ],
   };
+  
+  
 
-  // Datos para el gráfico de barras de hábitos completados vs. pendientes
+  // Datos para el gráfico de barras (Pendientes vs Completados)
   const barData = {
     labels: ['Completados', 'Pendientes'],
     datasets: [
@@ -47,39 +56,62 @@ const Stats = () => {
   };
 
   return (
-    <div className="stats-container">
-      <h2 className="text-2xl font-bold text-center mb-6">Estadísticas de Hábitos</h2>
-      <div className="chart-container">
-        <div className="doughnut-chart">
-          <Doughnut data={doughnutData} />
+    <div className="stats-container p-4 bg-opacity-80 bg-black rounded-lg shadow-lg">
+      <div className="stats-header">
+        <h2 className="text-3xl font-bold text-white">Estadísticas de Hábitos</h2>
+        <button
+          onClick={() => navigate('/')}
+          className="button-back"
+        >
+          ← Regresar
+        </button>
+      </div>
+
+      <div className="stats-summary flex justify-around my-6">
+        <div className="stat-item text-center">
+          <h3>Total Hábitos</h3>
+          <p>{progress.pending + progress.completed}</p>
         </div>
-        <div className="bar-chart">
-          <Bar data={barData} options={barOptions} />
+        <div className="stat-item text-center">
+          <h3>Completados</h3>
+          <p>{progress.completed}</p>
+        </div>
+        <div className="stat-item text-center">
+          <h3>% Cumplido</h3>
+          <p>
+            {progress.pending + progress.completed > 0
+              ? ((progress.completed / (progress.completed + progress.pending)) * 100).toFixed(0) + '%'
+              : '0%'}
+          </p>
+        </div>
+      </div>
+
+      <div className="legend-container flex justify-center mb-6">
+        <div className="legend-item mr-4">
+          <span className="legend-color" style={{ backgroundColor: '#36A2EB' }}></span> Salud
+        </div>
+        <div className="legend-item mr-4">
+          <span className="legend-color" style={{ backgroundColor: '#FF6384' }}></span> Productividad
+        </div>
+        <div className="legend-item">
+          <span className="legend-color" style={{ backgroundColor: '#FFCE56' }}></span> Creatividad
+        </div>
+      </div>
+
+      <div className="chart-container flex flex-col md:flex-row md:justify-center gap-8">
+        {progress.completed > 0 && (
+          <div className="doughnut-chart w-full md:w-1/3 max-w-sm">
+            <Doughnut data={doughnutData} options={{ plugins: { legend: { display: false } } }} />
+          </div>
+        )}
+        <div className="side-charts w-full md:w-2/3 flex flex-col md:flex-row gap-4">
+          <div className="bar-chart w-full md:w-1/2 max-w-sm">
+            <Bar data={barData} options={{ plugins: { legend: { display: false } }, maintainAspectRatio: false }} />
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const barOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    x: {
-      beginAtZero: true,
-      grid: { display: false },
-    },
-    y: {
-      beginAtZero: true,
-      min: 0,
-      grid: { display: false },
-      ticks: { stepSize: 1 },
-    },
-  },
-  plugins: {
-    legend: { display: false },
-  },
-};
-
 export default Stats;
-
