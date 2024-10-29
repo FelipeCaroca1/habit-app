@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { habits, setHabits } = useContext(HabitsContext);
-  const { addPendingHabit, completeHabit, uncompleteHabit, deleteHabit } = useContext(ProgressContext); 
+  const { addPendingHabit, completeHabit, uncompleteHabit, deleteHabit } = useContext(ProgressContext);
   const [isEditing, setIsEditing] = useState(null);
   const [editText, setEditText] = useState('');
   const [filter, setFilter] = useState('');
@@ -55,15 +55,15 @@ const Home = () => {
     setHabits(updatedHabits);
   
     const habitCategory = habits[index].category;
-    const isCompleted = !habits[index].completed;
+    const isCompleted = !habits[index].completed; // Verifica si se completó o no
   
     if (isCompleted) {
-      completeHabit(habitCategory);
+      completeHabit(habitCategory); // Solo incrementar si se completó
     } else {
-      uncompleteHabit(habitCategory);
+      uncompleteHabit(habitCategory); // Solo decrementa si se desmarca
     }
   };
-
+  
   const filteredHabits = filter
     ? habits.filter(
         (habit) =>

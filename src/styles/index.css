@@ -301,6 +301,7 @@ select:hover { background-color: #333; }
   font-size: 2rem;
   font-weight: bold;
   color: white;
+  text-align: center;
 }
 
 /* Gráfico de línea */
@@ -317,26 +318,26 @@ select:hover { background-color: #333; }
 }
 
 .about-content {
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro y translúcido */
-  color: #ffffff; /* Texto blanco */
-  padding: 30px; /* Mayor espacio interno */
-  border-radius: 12px; /* Bordes redondeados */
-  box-shadow: 0px 4px 12px rgba(0, 255, 170, 0.2); /* Sombra suave */
-  max-width: 800px; /* Ancho máximo */
-  margin: 40px auto; /* Centrar el contenido */
+  background-color: rgba(0, 0, 0, 0.8); 
+  color: #ffffff; 
+  padding: 30px; 
+  border-radius: 12px; 
+  box-shadow: 0px 4px 12px rgba(0, 255, 170, 0.2); 
+  max-width: 800px; 
+  margin: 40px auto; 
 }
 
 .about-content h1 {
-  color: #00FFAA; /* Color verde futurista para el título */
-  margin-bottom: 20px; /* Espacio debajo del título */
-  font-size: 2rem; /* Tamaño del título */
+  color: #00FFAA; 
+  margin-bottom: 20px; 
+  font-size: 2rem; 
   text-align: start;
 }
 
 .about-content p {
-  margin-bottom: 15px; /* Mayor espaciado entre párrafos */
-  line-height: 1.6; /* Mayor altura de línea para mejor legibilidad */
-  font-size: 1.1rem; /* Tamaño de fuente de los párrafos */
+  margin-bottom: 15px; 
+  line-height: 1.6; 
+  font-size: 1.1rem; 
 }
 
 @keyframes fadeIn {
@@ -349,12 +350,13 @@ select:hover { background-color: #333; }
 }
 
 .fade-in {
-  animation: fadeIn 1s ease-in-out; /* El efecto de fade-in se aplicará cada vez que cambie la frase */
+  animation: fadeIn 1s ease-in-out; 
 }
+
 .motivational-quote {
-  animation: fadeIn 2s ease-in-out; /* Aparece lentamente en 2 segundos */
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro y transparente */
-  color: #00FFAA; /* Color verde futurista */
+  animation: fadeIn 2s ease-in-out; 
+  background-color: rgba(0, 0, 0, 0.7); 
+  color: #00FFAA; 
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 255, 170, 0.2);
@@ -379,30 +381,30 @@ select:hover { background-color: #333; }
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   max-width: 600px;
-  margin: 40px auto; /* Centrar en la página */
+  margin: 40px auto; 
 }
 
 .config-title {
   font-size: 2rem;
   color: white;
   text-align: center;
-  margin-bottom: 20px; /* Espaciado debajo del título */
+  margin-bottom: 20px; 
 }
 .config-item {
-  margin-bottom: 20px; /* Espaciado entre los elementos */
+  margin-bottom: 20px; 
 }
 
 .config-select {
   margin-top: 10px;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #4b5563; /* Borde gris */
-  background-color: #333; /* Fondo de select */
-  color: white; /* Texto blanco */
+  border: 1px solid #4b5563; 
+  background-color: #333; 
+  color: white; 
 }
 
 .config-checkbox {
-  margin-right: 10px; /* Espaciado al lado del checkbox */
+  margin-right: 10px; 
 }
 
 .config-button {
@@ -410,58 +412,58 @@ select:hover { background-color: #333; }
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #3b82f6; /* Color de fondo azul */
-  color: white; /* Texto blanco */
-  cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+  background-color: #3b82f6; 
+  color: white; 
+  cursor: pointer; 
   transition: background-color 0.3s;
 }
 
 h1 {
-  text-align: center; /* Centrar el título */
+  text-align: center; 
 }
 
 label {
-  font-weight: bold; /* Texto en negrita para etiquetas */
+  font-weight: bold; 
 }
 
 button {
-  transition: background-color 0.3s; /* Suavizar el cambio de color */
+  transition: background-color 0.3s; 
 }
 
 .config-button:hover {
-  background-color: #2563eb; /* Color de fondo más oscuro al hacer hover */
+  background-color: #2563eb; 
 }
 
 body[data-theme='claro'] {
-  background-color: #ffffff; /* Color de fondo claro */
-  color: #000000; /* Texto negro */
+  background-color: #ffffff; 
+  color: #000000; 
 }
 
 body[data-theme='oscuro'] {
-  background-color: #000000; /* Color de fondo oscuro */
-  color: #ffffff; /* Texto blanco */
+  background-color: #000000; 
+  color: #ffffff; 
 }
 
 .footer-container {
-  background-color: rgba(0, 0, 0, 0.9); /* Fondo negro traslúcido */
-  color: white; /* Texto blanco */
-  padding: 1rem; /* Espaciado interno */
-  text-align: center; /* Centrar el texto */
-  position: relative; /* Para mantener el footer en su lugar */
+  background-color: rgba(0, 0, 0, 0.9); 
+  color: white; 
+  padding: 1rem; 
+  text-align: center; 
+  position: relative; 
   bottom: 0;
-  width: 100%; /* Asegura que el footer ocupe todo el ancho */
+  width: 100%; 
 }
 
 .footer-link {
-  color: #00bfff; /* Color de los enlaces */
-  text-decoration: none; /* Sin subrayado */
+  color: #00bfff; 
+  text-decoration: none; 
   transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-  color: #ffffff; /* Cambiar color al hacer hover */
+  color: #ffffff; 
 }
 
 .footer-text {
-  margin: 0.5rem 0; /* Espaciado entre líneas */
+  margin: 0.5rem 0; 
 }

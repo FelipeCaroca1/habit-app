@@ -17,12 +17,10 @@ export const ProgressProvider = ({ children }) => {
         };
   });
 
-  // Guardar progreso en sessionStorage
   useEffect(() => {
     sessionStorage.setItem('progress', JSON.stringify(progress));
   }, [progress]);
 
-  // Función para agregar un nuevo hábito pendiente
   const addPendingHabit = (category) => {
     setProgress((prevProgress) => ({
       ...prevProgress,
@@ -31,32 +29,37 @@ export const ProgressProvider = ({ children }) => {
     }));
   };
 
-  // Función para marcar un hábito como completado
   const completeHabit = (category) => {
-    setProgress((prevProgress) => ({
-      ...prevProgress,
-      [category]: prevProgress[category] + 1,
-      completed: prevProgress.completed + 1,
-      pending: Math.max(prevProgress.pending - 1, 0),
-    }));
+    setProgress((prevProgress) => {
+      // Solo incrementar si el hábito está marcado como completado
+      if (prevProgress[category] >= 0) {
+        return {
+          ...prevProgress,
+          [category]: prevProgress[category] + 1,
+          completed: prevProgress.completed + 1,
+          pending: Math.max(prevProgress.pending - 1, 0),
+        };
+      }
+      return prevProgress; // No se hace nada si el hábito no está completado
+    });
   };
-  // Función para desmarcar un hábito completado (volver a pendiente)
+  
   const uncompleteHabit = (category) => {
     setProgress((prevProgress) => ({
       ...prevProgress,
-      [category]: Math.max(prevProgress[category] - 1, 0),
-      completed: Math.max(prevProgress.completed - 1, 0),
-      pending: prevProgress.pending + 1,
+      [category]: Math.max(prevProgress[category] - 1, 0), // Asegurar que no sea negativo
+      completed: Math.max(prevProgress.completed - 1, 0), // Asegurar que no sea negativo
+      pending: prevProgress.pending + 1, // Incrementar los pendientes
     }));
   };
+  
 
-  // Función para eliminar un hábito
   const deleteHabit = (category, isCompleted) => {
     setProgress((prevProgress) => ({
       ...prevProgress,
-      [category]: prevProgress[category] - 1,
-      completed: isCompleted ? prevProgress.completed - 1 : prevProgress.completed,
-      pending: isCompleted ? prevProgress.pending : prevProgress.pending - 1,
+      [category]: Math.max(prevProgress[category] - 1, 0),
+      completed: isCompleted ? Math.max(prevProgress.completed - 1, 0) : prevProgress.completed,
+      pending: isCompleted ? prevProgress.pending : Math.max(prevProgress.pending - 1, 0),
     }));
   };
 
