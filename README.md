@@ -18,3 +18,38 @@ HabitApp es una aplicación diseñada para ayudarte a construir hábitos positiv
 - **Axios**: Para realizar solicitudes HTTP a APIs externas.
 - **CSS**: Para estilizar la aplicación y asegurar una experiencia visual atractiva.
 
+## Instalación de la App
+
+### Requisitos previos
+
+1. **Node.js** (versión recomendada 14.x o superior).
+2. **Git** para clonar el repositorio.
+3. **Vite** ya que se usó para crear la app (se instala junto con las dependencias).
+
+### Pasos para instalar y correr la app localmente:
+
+1. **Clonar el repositorio:**
+
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+
+2. **Navegar a la carpeta del proyecto:**
+   
+   ```bash
+   cd <NOMBRE_DEL_PROYECTO>
+
+3. **Instalar dependencias**
+   
+   ```bash
+   npm install
+
+4. **Correr la app en modo de desarrollo**   
+   
+    ```bash
+    npm run dev
+
+5. Abrir en el navegador: Normalmente, Vite te da un link directo en la terminal (ejemplo: http://localhost:3000). Solo copia y pega ese enlace en tu navegador para ver la app.
+
+### Despliegue en GitHub Pages
+La app ya está desplegada en GitHub Pages, donde puedes verla en acción.
+Visita `<http://FelipeCaroca1.github.io>`
