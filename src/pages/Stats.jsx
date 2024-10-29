@@ -26,9 +26,9 @@ const Stats = () => {
       {
         label: 'Progreso Completado por Categoría',
         data: [
-          progress.Salud > 0 ? progress.Salud : 0,
-          progress.Productividad > 0 ? progress.Productividad : 0,
-          progress.Creatividad > 0 ? progress.Creatividad : 0,
+          progress.Salud,
+          progress.Productividad, 
+          progress.Creatividad, 
         ],
         backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
         hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],

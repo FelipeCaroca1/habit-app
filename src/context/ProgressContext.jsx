@@ -21,10 +21,9 @@ export const ProgressProvider = ({ children }) => {
     sessionStorage.setItem('progress', JSON.stringify(progress));
   }, [progress]);
 
-  const addPendingHabit = (category) => {
+  const addPendingHabit = () => {
     setProgress((prevProgress) => ({
       ...prevProgress,
-      [category]: prevProgress[category] + 1,
       pending: prevProgress.pending + 1,
     }));
   };
