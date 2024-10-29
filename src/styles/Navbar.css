@@ -1,5 +1,5 @@
 nav {
-    display: flex !important; /* Forzamos display: flex */
+    display: flex !important; 
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
@@ -16,8 +16,8 @@ nav {
   .nav-button {
     background-color: #333;
     color: white;
-    padding: 0.8rem 1.5rem; /* Aumentamos el tamaño del padding para que los botones sean más grandes */
-    font-size: 1.1rem; /* Aumentamos el tamaño de la fuente */
+    padding: 0.8rem 1.5rem; 
+    font-size: 1.1rem; 
     border: none;
     border-radius: 8px;
     transition: all 0.3s ease;

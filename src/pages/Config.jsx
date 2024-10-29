@@ -7,7 +7,7 @@ const Config = () => {
 
   const handleThemeChange = (e) => {
     setTheme(e.target.value);
-    document.body.className = e.target.value; // Cambiar clase de body para el tema
+    document.body.className = e.target.value; 
   };
 
   const handleLanguageChange = (e) => {

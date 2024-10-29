@@ -6,8 +6,8 @@ import About from './pages/About';
 import Config from './pages/Config';
 import { HabitsProvider } from './context/HabitsContext';
 import { ProgressProvider } from './context/ProgressContext';
-import MotivationalQuote from './components/MotivationalQuote'; // Importa el componente de la cita motivacional
-import Footer from './components/Footer'; // Importa el nuevo componente Footer
+import MotivationalQuote from './components/MotivationalQuote'; 
+import Footer from './components/Footer';
 import './styles/index.css';
 
 const AppContent = () => {
@@ -24,7 +24,7 @@ const AppContent = () => {
         <Route path="/about" element={<About />} />
         <Route path="/config" element={<Config />} />
       </Routes>
-      <Footer /> {/* Agrega el footer aquí */}
+      <Footer /> 
     </div>
   );
 };

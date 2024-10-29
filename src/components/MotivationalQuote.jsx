@@ -6,12 +6,11 @@ const apiKey = 'AIzaSyDekSyR3u3uHYLNdeIZj6YVs6Ye9Z-fRpM';
 const MotivationalQuote = () => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-  const [animate, setAnimate] = useState(true); // Mantener el efecto de entrada
-
+  const [animate, setAnimate] = useState(true); 
   useEffect(() => {
     const fetchQuote = async () => {
       try {
-        // Llamar a tu backend para obtener una cita
+        // Llamar backend para obtener una cita
         const response = await axios.get('http://localhost:5000/quote'); 
         const data = response.data[0];
 
@@ -30,7 +29,7 @@ const MotivationalQuote = () => {
 
         const translatedQuote = translateResponse.data.data.translations[0].translatedText;
 
-        // Guardamos la frase traducida y el autor
+        
         setQuote(translatedQuote);
         setAuthor(data.a); // El autor de la cita
         setAnimate(true); // Activar el efecto de entrada
