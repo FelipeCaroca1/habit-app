@@ -1,5 +1,5 @@
 nav {
-    display: flex !important; 
+    display: flex !important; /* Forzamos display: flex */
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
