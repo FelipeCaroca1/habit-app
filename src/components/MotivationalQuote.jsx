@@ -11,8 +11,8 @@ const MotivationalQuote = () => {
     const fetchQuote = async () => {
       try {
         // Llamar backend para obtener una cita
-        const response = await axios.get('http://localhost:5000/quote'); 
-        const data = response.data[0];
+        const response = await axios.get('https://api.quotable.io/random'); 
+        const data = response.data.content;
 
         // Traducción de la cita al español
         const translateResponse = await axios.post(
@@ -21,7 +21,7 @@ const MotivationalQuote = () => {
           {
             params: {
               key: apiKey,
-              q: data.q, // Texto en inglés
+              q: data, // Texto en inglés
               target: 'es', // Idioma de destino
             },
           }
@@ -31,7 +31,7 @@ const MotivationalQuote = () => {
 
         
         setQuote(translatedQuote);
-        setAuthor(data.a); // El autor de la cita
+        setAuthor(response.data.author); // El autor de la cita
         setAnimate(true); // Activar el efecto de entrada
       } catch (error) {
         console.error("Error fetching or translating the quote", error);
