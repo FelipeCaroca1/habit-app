@@ -34,6 +34,8 @@ const MotivationalQuote = () => {
         setAuthor(response.data.author); // El autor de la cita
         setAnimate(true); // Activar el efecto de entrada
       } catch (error) {
+        setQuote('Lo que no te mata te hace más fuerte')
+        setAuthor('Friedrich Nietzsche')
         console.error("Error fetching or translating the quote", error);
       }
     };
