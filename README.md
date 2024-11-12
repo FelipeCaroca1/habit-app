@@ -51,5 +51,5 @@ HabitApp es una aplicación diseñada para ayudarte a construir hábitos positiv
 5. Abrir en el navegador: Normalmente, Vite te da un link directo en la terminal (ejemplo: http://localhost:3000). Solo copia y pega ese enlace en tu navegador para ver la app.
 
 ### Despliegue en GitHub Pages
-La app ya está desplegada en GitHub Pages, donde puedes verla en acción.
-Visita `<http://FelipeCaroca1.github.io>`
+La app ya está desplegada en Vercel, donde puedes verla en acción.
+Visita `<https://habit-app-pearl.vercel.app>`
