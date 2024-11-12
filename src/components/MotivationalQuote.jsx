@@ -11,7 +11,7 @@ const MotivationalQuote = () => {
     const fetchQuote = async () => {
       try {
         // Llamar backend para obtener una cita
-        const response = await axios.get('https://api.quotable.io/random'); 
+        const response = await axios.get('http://api.quotable.io/random'); 
         const data = response.data.content;
 
         // Traducción de la cita al español
