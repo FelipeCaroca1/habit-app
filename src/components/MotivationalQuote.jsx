@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const apiKey = 'AIzaSyDekSyR3u3uHYLNdeIZj6YVs6Ye9Z-fRpM';
+
+const apikey = import.meta.env.VITE_APIKEY 
+
 
 const MotivationalQuote = () => {
   const [quote, setQuote] = useState('');
@@ -20,7 +22,7 @@ const MotivationalQuote = () => {
           {},
           {
             params: {
-              key: apiKey,
+              key: apikey,
               q: data, // Texto en inglés
               target: 'es', // Idioma de destino
             },
