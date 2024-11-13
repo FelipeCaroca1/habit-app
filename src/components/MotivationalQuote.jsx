@@ -13,7 +13,7 @@ const MotivationalQuote = () => {
     const fetchQuote = async () => {
       try {
         // Llamar backend para obtener una cita
-        const response = await axios.get('https://zenquotes.io/api/random'); 
+        const response = await axios.get('https://cors-anywhere.herokuapp.com/https://zenquotes.io/api/random'); 
         const data = response.data.content;
 
         // Traducción de la cita al español
