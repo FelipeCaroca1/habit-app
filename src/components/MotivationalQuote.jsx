@@ -9,35 +9,24 @@ const MotivationalQuote = () => {
   useEffect(() => {
     const fetchAndTranslateQuote = async () => {
       try {
-        console.log("Fetching quote from ZenQuotes API...");
-        const quoteResponse = await axios.get('https://zenquotes.io/api/random');
-        if (quoteResponse.data && quoteResponse.data.length > 0) {
-          const quoteData = quoteResponse.data[0];
-          const originalQuote = quoteData.q;
-          const authorName = quoteData.a;
+        console.log("Fetching quote from backend...");
+        const quoteResponse = await axios.get('http://localhost:5000/api/random'); // Obtener cita motivacional
+        const quoteData = quoteResponse.data[0];
+        const originalQuote = quoteData.q;
+        const authorName = quoteData.a;
 
-          setQuote(originalQuote);
-          setAuthor(authorName);
+        setQuote(originalQuote);
+        setAuthor(authorName);
 
-          try {
-            console.log("Translating quote...");
-            const API_KEY = import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY;
-            const translationResponse = await axios.post(
-              `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`,
-              {
-                q: originalQuote,
-                target: 'es',
-              }
-            );
-            setTranslatedQuote(translationResponse.data.data.translations[0].translatedText);
-          } catch (translationError) {
-            console.error("Error during translation:", translationError);
-          }
-        } else {
-          throw new Error("No quotes found in the API response");
-        }
-      } catch (quoteError) {
-        console.error("Error fetching the quote:", quoteError);
+        console.log("Translating quote...");
+        const translationResponse = await axios.post('http://localhost:5000/api/translate', {
+          text: originalQuote,
+          target: 'es', // Traducir al español
+        });
+
+        setTranslatedQuote(translationResponse.data);
+      } catch (error) {
+        console.error("Error fetching or translating the quote:", error);
         setQuote('Lo que no te mata te hace más fuerte');
         setAuthor('Friedrich Nietzsche');
         setTranslatedQuote('Lo que no te mata te hace más fuerte');
