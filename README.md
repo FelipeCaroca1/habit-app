@@ -86,4 +86,4 @@ HabitApp incluye un backend desarrollado con **Node.js** que actúa como interme
 
 6. **Despliegue en Vercel:** 
    La app ya está desplegada en Vercel, donde puedes verla en acción:
-   Ver HabitApp en acción 
+   [Ver HabitApp en acción ](https://habit-app-pearl.vercel.app/)
