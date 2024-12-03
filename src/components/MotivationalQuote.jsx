@@ -1,54 +1,56 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
-const apikey = import.meta.env.VITE_APIKEY 
-
-
 const MotivationalQuote = () => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-  const [animate, setAnimate] = useState(true); 
+  const [translatedQuote, setTranslatedQuote] = useState('');
+
   useEffect(() => {
-    const fetchQuote = async () => {
+    const fetchAndTranslateQuote = async () => {
       try {
-        // Llamar backend para obtener una cita
-        const response = await axios.get('https://cors-anywhere.herokuapp.com/https://zenquotes.io/api/random'); 
-        const data = response.data.content;
+        console.log("Fetching quote from ZenQuotes API...");
+        const quoteResponse = await axios.get('https://zenquotes.io/api/random');
+        if (quoteResponse.data && quoteResponse.data.length > 0) {
+          const quoteData = quoteResponse.data[0];
+          const originalQuote = quoteData.q;
+          const authorName = quoteData.a;
 
-        // Traducción de la cita al español
-        const translateResponse = await axios.post(
-          `https://translation.googleapis.com/language/translate/v2`,
-          {},
-          {
-            params: {
-              key: apikey,
-              q: data, // Texto en inglés
-              target: 'es', // Idioma de destino
-            },
+          setQuote(originalQuote);
+          setAuthor(authorName);
+
+          try {
+            console.log("Translating quote...");
+            const API_KEY = import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY;
+            const translationResponse = await axios.post(
+              `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`,
+              {
+                q: originalQuote,
+                target: 'es',
+              }
+            );
+            setTranslatedQuote(translationResponse.data.data.translations[0].translatedText);
+          } catch (translationError) {
+            console.error("Error during translation:", translationError);
           }
-        );
-
-        const translatedQuote = translateResponse.data.data.translations[0].translatedText;
-
-        
-        setQuote(translatedQuote);
-        setAuthor(response.data.author); // El autor de la cita
-        setAnimate(true); // Activar el efecto de entrada
-      } catch (error) {
-        setQuote('Lo que no te mata te hace más fuerte')
-        setAuthor('Friedrich Nietzsche')
-        console.error("Error fetching or translating the quote", error);
+        } else {
+          throw new Error("No quotes found in the API response");
+        }
+      } catch (quoteError) {
+        console.error("Error fetching the quote:", quoteError);
+        setQuote('Lo que no te mata te hace más fuerte');
+        setAuthor('Friedrich Nietzsche');
+        setTranslatedQuote('Lo que no te mata te hace más fuerte');
       }
     };
 
-    fetchQuote(); // Obtener una nueva frase cada vez que se carga el componente
+    fetchAndTranslateQuote();
   }, []);
 
   return (
-    <div className={`motivational-quote ${animate ? 'fade-in' : ''} bg-gray-800 text-white p-4 rounded-lg shadow-lg`}>
-      <p>&quot;{quote}&quot;</p>
-      <p className="author">- {author}</p>
+    <div className="motivational-quote bg-gray-800 text-white p-4 rounded-lg shadow-lg">
+      <p className="text-lg font-bold">{translatedQuote || quote}</p>
+      <p className="author text-sm italic">- {author}</p>
     </div>
   );
 };
