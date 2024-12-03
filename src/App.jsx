@@ -8,24 +8,27 @@ import { HabitsProvider } from './context/HabitsContext';
 import { ProgressProvider } from './context/ProgressContext';
 import MotivationalQuote from './components/MotivationalQuote'; 
 import Footer from './components/Footer';
+import ErrorBoundary from './components/ErrorBoundary'; // Importar ErrorBoundary
 import './styles/index.css';
 
 const AppContent = () => {
   const location = useLocation();
 
   return (
-    <div>
-      <Navbar />
-      {/* Mostrar MotivationalQuote solo en Home y Stats */}
-      {(location.pathname === '/' || location.pathname === '/stats') && <MotivationalQuote />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/stats" element={<Stats />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/config" element={<Config />} />
-      </Routes>
-      <Footer /> 
-    </div>
+    <ErrorBoundary>
+      <div>
+        <Navbar />
+        {/* Mostrar MotivationalQuote solo en Home y Stats */}
+        {(location.pathname === '/' || location.pathname === '/stats') && <MotivationalQuote />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/config" element={<Config />} />
+        </Routes>
+        <Footer /> 
+      </div>
+    </ErrorBoundary>
   );
 };
 
@@ -42,3 +45,4 @@ const App = () => {
 };
 
 export default App;
+
